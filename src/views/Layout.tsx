@@ -183,7 +183,7 @@ const Layout: FC = (props) => {
             </head>
             <body>
                 {props.children}
-                <footer>
+                {/*<footer>
                     <div class="social">
                         <a href="https://github.com/imsyy/DailyHotApi" className="link" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
@@ -231,7 +231,7 @@ const Layout: FC = (props) => {
                             粤ICP备2022018134号-1
                         </a>
                     </div>
-                </footer>
+                </footer>*/}
             </body>
         </html>
     );

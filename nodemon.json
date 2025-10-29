@@ -1,0 +1,20 @@
+{
+    "watch": [
+        "src"
+    ],
+    "ext": "ts,tsx",
+    "exec": "tsx src/index.ts",
+    "ignore": [
+        "dist/**",
+        "public/**",
+        "**/logs/**",
+        "node_modules/**",
+        "pnpm-lock.yaml"
+    ],
+    "delay": "200ms",
+    "env": {
+        "NODE_ENV": "development"
+    }
+}
+
+

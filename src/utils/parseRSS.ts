@@ -31,7 +31,22 @@ export const parseRSS = async (rssContent: string) => {
         }
     };
     try {
-        const feed = isUrl(rssContent) ? await parser.parseURL(rssContent) : await parser.parseString(rssContent);
+        // 1) 直解析 URL 或字符串
+        let contentToParse = rssContent;
+        if (!isUrl(rssContent) && typeof rssContent === "string") {
+            // 部分站点会在 <rss> 外包裹 HTML，先提取真正的 <rss> 片段
+            const extracted = extractRss(rssContent);
+            if (extracted) contentToParse = extracted;
+            // 常见非法字符修正：将裸 & 转义，避免 Unexpected close tag 等异常
+            // 仅在看起来不是 URL 且包含 <rss 时做轻度清洗
+            if (/^\s*</.test(contentToParse)) {
+                contentToParse = contentToParse.replace(/&(?!amp;|lt;|gt;|quot;|apos;|#\d+;)/g, "&amp;");
+            }
+        }
+
+        const feed = isUrl(contentToParse)
+            ? await parser.parseURL(contentToParse)
+            : await parser.parseString(contentToParse);
         const items = feed.items.map((item) => ({
             title: item.title, // 文章标题
             link: item.link, // 文章链接
@@ -45,6 +60,23 @@ export const parseRSS = async (rssContent: string) => {
         // 返回解析数据
         return items;
     } catch (error) {
+        // 二次尝试：若第一次失败，再强制仅提取 <rss> 内容解析一次
+        try {
+            const extracted = extractRss(rssContent);
+            if (extracted) {
+                const feed = await parser.parseString(extracted);
+                return feed.items.map((item) => ({
+                    title: item.title,
+                    link: item.link,
+                    pubDate: item.pubDate,
+                    author: item.creator ?? item.author,
+                    content: item.content,
+                    contentSnippet: item.contentSnippet,
+                    guid: item.guid,
+                    categories: item.categories,
+                }));
+            }
+        } catch { }
         logger.error("❌ [RSS] An error occurred while parsing RSS content");
         throw error;
     }

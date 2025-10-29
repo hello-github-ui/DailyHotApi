@@ -29,6 +29,7 @@
     "scripts": {
         "format": "prettier --write .",
         "dev": "cross-env NODE_ENV=development tsx watch --no-cache src/index.ts",
+        "dev:nodemon": "cross-env NODE_ENV=development nodemon --watch src --ext ts,tsx --exec \"tsx src/index.ts\"",
         "dev:cache": "cross-env NODE_ENV=development tsx watch src/index.ts",
         "build": "tsc --project tsconfig.json",
         "start": "cross-env NODE_ENV=development node dist/index.js"
@@ -63,6 +64,7 @@
         "cross-env": "^7.0.3",
         "globals": "^16.3.0",
         "prettier": "^3.6.2",
+        "nodemon": "^3.1.7",
         "tsx": "^4.20.3",
         "typescript": "^5.8.3",
         "typescript-eslint": "^8.38.0"

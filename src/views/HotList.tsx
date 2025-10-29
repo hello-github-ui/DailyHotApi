@@ -63,12 +63,6 @@ const HotList: FC = () => {
                         </svg>
                         自动旋转
                     </button>
-                    <button className="action-btn" onclick="resetView()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                        </svg>
-                        重置视图
-                    </button>
                 </div>
             </main>
 
@@ -87,7 +81,8 @@ const HotList: FC = () => {
 
                     .header {
                         text-align: center;
-                        margin: 0 auto 24px;
+                        margin-top: 20px;
+                        /*margin: 0 auto 24px;*/
                         position: relative;
                         z-index: 10;
                         max-width: 1800px;
@@ -820,19 +815,6 @@ const HotList: FC = () => {
                             container.classList.add('rotate-animation');
                             btn.classList.add('active');
                             isAutoRotating = true;
-                        }
-                    }
-
-                    // 重置视图
-                    function resetView() {
-                        const container = document.getElementById('platformsContainer');
-                        container.classList.remove('rotate-animation');
-                        container.style.transform = '';
-                        
-                        if (isAutoRotating) {
-                            clearInterval(autoRotateInterval);
-                            document.getElementById('autoRotateBtn').classList.remove('active');
-                            isAutoRotating = false;
                         }
                     }
 

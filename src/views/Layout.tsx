@@ -30,7 +30,7 @@ const Layout: FC = (props) => {
                 color: var(--text-color);
             }
             body {
-                width: 100vw;
+                width: 100%;
                 height: 100vh;
                 display: flex;
                 flex-direction: column;
@@ -228,7 +228,7 @@ const Layout: FC = (props) => {
                     </div>
                     <div class="icp">
                         <a href="https://beian.miit.gov.cn/" target="_blank">
-                            豫ICP备2022018134号-1
+                            粤ICP备2022018134号-1
                         </a>
                     </div>
                 </footer>

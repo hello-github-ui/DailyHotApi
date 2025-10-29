@@ -28,7 +28,14 @@ export const handleRoute = async (c: ListContext, noCache: boolean) => {
 const getList = async (options: Options, noCache: boolean) => {
     const { type } = options;
     const url = `https://www.v2ex.com/api/topics/${type}.json`;
-    const result = await get({ url, noCache });
+    const result = await get({
+        url,
+        noCache,
+        headers: {
+            "User-Agent":
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+        },
+    });
     const list = result.data;
     return {
         ...result,

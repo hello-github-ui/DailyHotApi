@@ -39,7 +39,7 @@ const getList = async (options: Options, noCache: boolean): Promise<RouterResTyp
         noCache,
         responseType: "arraybuffer",
         headers: {
-            userAgent:
+            "User-Agent":
                 "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Mobile Safari/537.36",
         },
     });
